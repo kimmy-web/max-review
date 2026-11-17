@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#101d46" />
+<title>Grammar Quest — Countable & Uncountable Nouns</title>
+<style>
+  :root{
+    --navy:#101d46; --navy2:#172a61; --blue:#2f72ef; --cyan:#42d6ed;
+    --yellow:#ffd34d; --orange:#ff884d; --green:#25c58a; --red:#ff6377;
+    --ink:#19264b; --muted:#7080a6; --paper:#fff; --line:#e6ebf7;
+    --shadow:0 20px 55px rgba(8,22,65,.22);
+  }
+  *{box-sizing:border-box}
+  html{min-height:100%;background:var(--navy)}
+  body{margin:0;min-height:100vh;font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:
+    radial-gradient(circle at 8% 12%,rgba(66,214,237,.22),transparent 23%),
+    radial-gradient(circle at 90% 85%,rgba(255,136,77,.18),transparent 25%),
+    linear-gradient(145deg,#101d46 0%,#1c3474 52%,#14224f 100%);overflow-x:hidden}
+  button,input{font:inherit}
+  button{cursor:pointer}
+  .stars,.stars:before,.stars:after{position:fixed;inset:0;pointer-events:none;content:"";background-image:radial-gradient(2px 2px at 20px 30px,#fff 50%,transparent 55%),radial-gradient(1px 1px at 90px 80px,#a8f5ff 50%,transparent 55%),radial-gradient(2px 2px at 160px 130px,#fff 50%,transparent 55%);background-size:210px 180px;opacity:.4;z-index:0}
+  .stars:before{transform:translate(70px,40px);opacity:.45}.stars:after{transform:translate(130px,100px);opacity:.3}
+  .shell{position:relative;z-index:1;width:min(100% - 28px,1000px);margin:0 auto;padding:22px 0 38px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;margin-bottom:20px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;font-size:clamp(14px,2.3vw,19px)}
+  .brand-mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--yellow),var(--orange));box-shadow:0 7px 0 #b95135;font-size:25px;transform:rotate(-5deg)}
+  .top-actions{display:flex;gap:9px;align-items:center}
+  .pill-btn{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;backdrop-filter:blur(8px)}
+  .pill-btn:hover{background:rgba(255,255,255,.22)}
+  .screen{display:none}.screen.active{display:block;animation:popIn .35s ease both}
+  @keyframes popIn{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:none}}
+  .panel{background:var(--paper);border:1px solid rgba(255,255,255,.55);border-radius:28px;box-shadow:var(--shadow);overflow:hidden}
+  .hero{padding:clamp(24px,5vw,52px);text-align:center;position:relative;isolation:isolate}
+  .hero:before{content:"";position:absolute;z-index:-1;width:390px;height:390px;border-radius:50%;background:#e8f5ff;top:-245px;left:calc(50% - 195px)}
+  .hero-emoji{font-size:clamp(60px,11vw,94px);line-height:1.2;filter:drop-shadow(0 10px 5px rgba(29,72,140,.18));animation:float 3s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+  .eyebrow{margin:18px 0 7px;color:var(--blue);font-size:12px;letter-spacing:.2em;font-weight:1000;text-transform:uppercase}
+  h1{font-size:clamp(29px,6vw,54px);line-height:1.02;margin:0;color:var(--navy);font-weight:1000;letter-spacing:-.04em}
+  .subtitle{font-size:clamp(14px,2.2vw,18px);color:var(--muted);font-weight:700;margin:13px auto 23px;max-width:600px;line-height:1.5}
+  .mission-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:0 auto 26px}
+  .tag{background:#eef5ff;color:#315eae;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900}
+  .player-row{max-width:430px;margin:0 auto;display:flex;gap:9px}
+  .player-row input{min-width:0;flex:1;border:2px solid var(--line);border-radius:15px;padding:13px 15px;color:var(--ink);outline:none;font-weight:700}
+  .player-row input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(47,114,239,.12)}
+  .primary-btn{border:0;border-radius:15px;background:linear-gradient(135deg,#ffcf43,#ff934c);color:#432c18;font-weight:1000;padding:14px 22px;box-shadow:0 5px 0 #c75d32;transition:transform .12s,filter .12s;white-space:nowrap}
+  .primary-btn:hover{filter:brightness(1.04);transform:translateY(-2px)}.primary-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c75d32}
+  .instructions{max-width:610px;margin:22px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:left}
+  .instruction{background:#f7f9ff;border:1px solid #edf0fa;border-radius:15px;padding:12px;font-size:12px;color:#617096;font-weight:700;line-height:1.4}
+  .instruction b{display:block;color:var(--ink);font-size:13px;margin-bottom:4px}
+  .game-panel{padding:clamp(16px,3vw,28px)}
+  .hud{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;margin-bottom:18px}
+  .progress-wrap{min-width:0}
+  .progress-label{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:900;color:var(--muted);margin-bottom:7px}
+  .progress-track{height:11px;background:#edf1fb;border-radius:999px;overflow:hidden}
+  .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));border-radius:999px;transition:width .35s ease}
+  .stat{min-width:82px;text-align:center;border-radius:14px;padding:8px 10px;background:#f1f6ff}
+  .stat small{display:block;color:#7886a6;font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em}
+  .stat strong{display:block;color:var(--navy);font-size:18px;font-weight:1000;font-variant-numeric:tabular-nums}
+  .question-head{display:flex;align-items:center;gap:12px;margin:14px 0 16px}
+  .q-number{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),#6358ed);color:#fff;font-size:19px;font-weight:1000;box-shadow:0 5px 0 #263e9e}
+  .q-title{font-size:12px;letter-spacing:.13em;color:var(--blue);font-weight:1000;text-transform:uppercase}
+  .q-count{font-size:12px;color:var(--muted);font-weight:800;margin-top:3px}
+  .question{margin:0 0 23px;padding:clamp(17px,3vw,25px);border-radius:19px;background:linear-gradient(135deg,#f3f8ff,#f8f7ff);border:1px solid #e8efff;color:var(--navy);font-size:clamp(20px,3.7vw,29px);font-weight:1000;line-height:1.35;text-align:center;overflow-wrap:anywhere}
+  .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .answer{min-height:72px;border:2px solid #e6ebf7;background:#fff;border-radius:17px;padding:13px 16px;display:flex;align-items:center;gap:13px;text-align:left;color:var(--ink);font-size:clamp(16px,2.5vw,20px);font-weight:900;box-shadow:0 4px 0 #e8edf7;transition:transform .12s,border-color .12s,background .12s,box-shadow .12s}
+  .answer:hover:not(:disabled){transform:translateY(-3px);border-color:#8bb5ff;box-shadow:0 7px 0 #dce8ff}
+  .answer:active:not(:disabled){transform:translateY(1px);box-shadow:0 2px 0 #dce8ff}
+  .answer:disabled{cursor:default}
+  .letter{width:36px;height:36px;flex:0 0 36px;border-radius:11px;display:grid;place-items:center;color:#fff;background:var(--blue);font-size:15px;font-weight:1000}
+  .answer:nth-child(2) .letter{background:#8a62e8}.answer:nth-child(3) .letter{background:#17b89a}.answer:nth-child(4) .letter{background:#f28a42}
+  .answer.wrong{border-color:var(--red);background:#fff1f3;animation:shake .35s ease}.answer.wrong .letter{background:var(--red)}
+  .answer.correct{border-color:var(--green);background:#eafff6;box-shadow:0 4px 0 #b8f0d8}.answer.correct .letter{background:var(--green)}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .feedback{min-height:53px;margin-top:16px;border-radius:15px;padding:12px 15px;display:flex;align-items:center;gap:10px;font-weight:900;font-size:14px;line-height:1.4;background:#f4f7fd;color:#6a7899}
+  .feedback .face{font-size:24px;flex:0 0 auto}.feedback.good{background:#eafff5;color:#087c59}.feedback.bad{background:#fff1f3;color:#b83c54}
+  .bottom-note{text-align:center;color:#94a0bb;font-size:11px;font-weight:800;margin-top:14px}
+  .review{padding:clamp(22px,5vw,48px);text-align:center}
+  .review .hero-emoji{font-size:76px}
+  .review h2{font-size:clamp(29px,5vw,44px);margin:8px 0;color:var(--navy);font-weight:1000}
+  .review-sub{color:var(--muted);font-weight:700;margin:0 auto 24px;max-width:520px}
+  .score-card{display:inline-block;background:linear-gradient(135deg,#fff4c9,#ffe0b8);border:2px solid #ffda73;border-radius:22px;padding:16px 35px;margin-bottom:18px;box-shadow:0 7px 0 #efbd58}
+  .score-card small{display:block;color:#936222;font-weight:1000;letter-spacing:.12em;text-transform:uppercase}.score-card strong{display:block;font-size:clamp(38px,7vw,58px);line-height:1.1;color:#653c13;font-weight:1000;font-variant-numeric:tabular-nums}
+  .review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:4px 0 20px}
+  .review-stat{background:#f4f7ff;border:1px solid #e7edfa;border-radius:16px;padding:14px 8px}
+  .review-stat span{display:block;font-size:23px;font-weight:1000;color:var(--navy);font-variant-numeric:tabular-nums}.review-stat small{display:block;color:var(--muted);font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+  .rank{display:inline-block;background:#edf7ff;color:#2863ba;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:1000;margin-bottom:12px}
+  .comment{font-size:16px;line-height:1.55;color:#506080;font-weight:800;max-width:620px;margin:0 auto 23px}
+  .review-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .secondary-btn{border:2px solid #dce5f7;background:#fff;border-radius:15px;padding:13px 20px;font-weight:1000;color:#526384}
+  .secondary-btn:hover{background:#f4f7ff}
+  .footer{color:rgba(255,255,255,.5);text-align:center;font-size:11px;font-weight:700;padding-top:17px}
+  .confetti-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10}
+  .confetti{position:absolute;top:-20px;width:9px;height:14px;border-radius:3px;animation:fall 1.35s ease-in forwards}
+  @keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(760deg);opacity:.9}}
+  .sparkle{position:absolute;font-size:23px;animation:burst .8s ease-out forwards}
+  @keyframes burst{from{transform:scale(.2);opacity:0}35%{opacity:1}to{transform:translate(var(--x),var(--y)) scale(1.2) rotate(30deg);opacity:0}}
+  .hidden{display:none!important}
+  @media(max-width:620px){.shell{width:min(100% - 18px,1000px);padding-top:13px}.topbar{margin-bottom:13px}.brand{font-size:12px}.brand-mark{width:39px;height:39px}.pill-btn{padding:9px 11px;font-size:12px}.instructions{grid-template-columns:1fr;max-width:360px}.instruction{display:flex;align-items:center;gap:9px}.instruction b{margin:0;min-width:93px}.hud{grid-template-columns:1fr 70px 70px;gap:7px}.stat{min-width:0;padding:7px 5px}.stat strong{font-size:16px}.stat small{font-size:9px}.q-number{width:45px;height:45px;flex-basis:45px}.answers{grid-template-columns:1fr;gap:9px}.answer{min-height:59px;padding:10px 13px}.question{margin-bottom:16px}.review-grid{grid-template-columns:1fr 1fr}.player-row{flex-direction:column}.player-row .primary-btn{width:100%}}
+  @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">🚀</span><span>Grammar Quest <span style="color:#63e5f4">·</span> Space Ranger</span></div>
+    <div class="top-actions">
+      <button class="pill-btn" id="soundBtn" type="button" aria-label="Turn sound off">🔊 Sound ON</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="screen active" id="startScreen">
+      <div class="panel hero">
+        <div class="hero-emoji" aria-hidden="true">🧑‍🚀</div>
+        <div class="eyebrow">Mission 05 · English grammar</div>
+        <h1>GRAMMAR<br><span style="color:var(--blue)">QUEST!</span></h1>
+        <p class="subtitle">Countable &amp; Uncountable Nouns<br>93 câu hỏi · 1 nhiệm vụ · Chinh phục vũ trụ ngữ pháp!</p>
+        <div class="mission-tags"><span class="tag">⭐ Tích điểm</span><span class="tag">⚡ Tăng tốc</span><span class="tag">🛡️ Sai thì thử lại</span></div>
+        <div class="player-row">
+          <input id="playerName" type="text" maxlength="18" placeholder="Tên nhà thám hiểm (không bắt buộc)" autocomplete="off" aria-label="Tên nhà thám hiểm" />
+          <button class="primary-btn" id="startBtn" type="button">BẮT ĐẦU 🚀</button>
+        </div>
+        <div class="instructions">
+          <div class="instruction"><b>🎯 Chọn đáp án</b>Trả lời đúng để mở khóa câu tiếp theo.</div>
+          <div class="instruction"><b>🔁 Thử lại</b>Chọn sai? Không sao, thử lại đến khi đúng!</div>
+          <div class="instruction"><b>🏆 Săn điểm</b>Đúng nhanh và ngay lần đầu để nhận thêm điểm.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="gameScreen" aria-live="polite">
+      <div class="panel game-panel" id="gamePanel">
+        <div class="hud">
+          <div class="progress-wrap">
+            <div class="progress-label"><span>MISSION PROGRESS</span><span id="progressText">1 / 93</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+          <div class="stat"><small>⭐ Score</small><strong id="scoreValue">0</strong></div>
+          <div class="stat"><small>⏱ Time</small><strong id="timeValue">00:00</strong></div>
+        </div>
+        <div class="question-head">
+          <div class="q-number" id="questionNumber">01</div>
+          <div><div class="q-title">Space challenge</div><div class="q-count" id="playerGreeting">Ready, Ranger!</div></div>
+        </div>
+        <h2 class="question" id="questionText">There is _____ apple on the table.</h2>
+        <div class="answers" id="answerGrid"></div>
+        <div class="feedback" id="feedback" role="status" aria-live="polite"><span class="face">🧠</span><span>Chọn đáp án chính xác để tiếp tục nhiệm vụ!</span></div>
+        <div class="bottom-note">MẸO: Đọc kỹ danh từ và cả câu trước khi chọn nhé!</div>
+      </div>
+    </section>
+
+    <section class="screen" id="reviewScreen">
+      <div class="panel review">
+        <div class="hero-emoji" aria-hidden="true" id="reviewEmoji">🏆</div>
+        <div class="eyebrow">Mission completed</div>
+        <h2 id="reviewTitle">MISSION COMPLETE!</h2>
+        <p class="review-sub" id="reviewSubtitle">Bạn đã hoàn thành toàn bộ thử thách.</p>
+        <div class="score-card"><small>Total points</small><strong id="finalScore">0</strong></div>
+        <div class="review-grid">
+          <div class="review-stat"><span id="finalTime">00:00</span><small>⏱ Thời gian</small></div>
+          <div class="review-stat"><span id="finalWrong">0</span><small>❌ Lần trả lời sai</small></div>
+          <div class="review-stat"><span id="finalAccuracy">100%</span><small>🎯 Độ chính xác</small></div>
+          <div class="review-stat"><span id="finalFirstTry">0 / 93</span><small>⭐ Đúng ngay lần đầu</small></div>
+        </div>
+        <div class="rank" id="rankLabel">🌟 SPACE RANGER</div>
+        <p class="comment" id="reviewComment">Một hành trình tuyệt vời! Tiếp tục phát huy nhé!</p>
+        <div class="review-actions">
+          <button class="primary-btn" id="playAgainBtn" type="button">CHƠI LẠI 🔄</button>
+          <button class="secondary-btn" id="homeBtn" type="button">VỀ TRANG ĐẦU</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">GLOBAL SUCCESS 6 · UNIT 5 · COUNTABLE AND UNCOUNTABLE NOUNS</footer>
+</div>
+
+<script>
+'use strict';
+
+// Questions and choices are kept in the exact order and wording supplied.
+// answer is the zero-based index of the intended choice, or an array when another choice is also grammatically valid.
+const questions = [
+  {q:"There is _____ apple on the table.",o:["some","much","an","many"],a:2},
+  {q:"Do you have _____ brothers or sisters?",o:["any","much","a","some"],a:0},
+  {q:"We need _____ sugar to make this cake.",o:["many","some","a","an"],a:1},
+  {q:"There isn't _____ milk in the fridge.",o:["many","a","much","some"],a:2},
+  {q:"How _____ students are there in your class?",o:["much","many","some","any"],a:1},
+  {q:"I have _____ new bicycle.",o:["a","some","much","many"],a:0},
+  {q:"Would you like _____ tea?",o:["many","any","some","a"],a:2},
+  {q:"There aren't _____ books on the shelf.",o:["much","any","a","some"],a:1},
+  {q:"How _____ water do you drink every day?",o:["many","a","much","some"],a:2},
+  {q:"My mother bought _____ oranges at the market.",o:["some","much","a","any"],a:0},
+  {q:"She has _____ cat and two dogs.",o:["any","some","a","much"],a:2},
+  {q:"Are there _____ eggs in the fridge?",o:["any","much","a","many"],a:[0,3]},
+  {q:"We don't have _____ time before the bus leaves.",o:["many","much","some","a"],a:1},
+  {q:"There are _____ flowers in the garden.",o:["much","a","some","any"],a:2},
+  {q:"How _____ money did you spend?",o:["much","many","any","a"],a:0},
+  {q:"I saw _____ elephant at the zoo.",o:["a","an","some","many"],a:1},
+  {q:"Would you like _____ biscuits?",o:["some","much","a","any"],a:0},
+  {q:"There isn't _____ rice left.",o:["many","some","much","a"],a:2},
+  {q:"Do you need _____ help?",o:["any","many","a","much"],a:[0,3]},
+  {q:"How _____ chairs are in the room?",o:["much","many","some","a"],a:1},
+  {q:"He has _____ interesting book.",o:["much","an","some","any"],a:1},
+  {q:"I bought _____ bread for breakfast.",o:["some","many","a","any"],a:0},
+  {q:"There aren't _____ people at the bus stop.",o:["much","any","a","some"],a:1},
+  {q:"How _____ cheese is in the sandwich?",o:["many","much","a","any"],a:1},
+  {q:"We have _____ homework tonight.",o:["many","a","some","an"],a:2},
+  {q:"She wants to buy _____ dress for the party.",o:["some","a","much","many"],a:1},
+  {q:"Is there _____ juice in the bottle?",o:["many","a","any","some"],a:[2,3]},
+  {q:"There are _____ pencils in my bag.",o:["some","much","a","any"],a:0},
+  {q:"I don't eat _____ meat.",o:["many","much","a","some"],a:1},
+  {q:"How _____ lessons do you have today?",o:["much","many","any","a"],a:1},
+  {q:"He is reading _____ newspaper.",o:["a","some","many","much"],a:0},
+  {q:"Can I have _____ water, please?",o:["many","a","some","any"],a:2},
+  {q:"There isn't _____ butter in the fridge.",o:["much","many","some","a"],a:0},
+  {q:"Are there _____ shops near your house?",o:["some","much","any","a"],a:2},
+  {q:"How _____ bananas did she buy?",o:["many","much","some","a"],a:0},
+  {q:"We saw _____ owl in the tree.",o:["a","an","some","any"],a:1},
+  {q:"My father drinks _____ coffee every morning.",o:["some","many","a","any"],a:0},
+  {q:"I don't have _____ questions.",o:["much","any","some","a"],a:1},
+  {q:"How _____ salt do we need?",o:["many","a","much","any"],a:2},
+  {q:"There are _____ children playing outside.",o:["some","much","a","any"],a:0},
+  {q:"She needs _____ umbrella because it is raining.",o:["a","an","some","much"],a:1},
+  {q:"Would you like _____ cake?",o:["some","many","a","any"],a:[0,2]},
+  {q:"There aren't _____ tomatoes in the basket.",o:["much","some","any","a"],a:2},
+  {q:"I don't have _____ free time this week.",o:["many","much","some","a"],a:1},
+  {q:"How _____ books did you borrow?",o:["much","many","any","some"],a:1},
+  {q:"Tom has _____ new computer.",o:["a","some","much","many"],a:0},
+  {q:"We need _____ eggs to make an omelette.",o:["much","some","a","an"],a:1},
+  {q:"Is there _____ information about the course?",o:["many","any","a","some"],a:[1,3]},
+  {q:"How _____ flour is there in the bag?",o:["many","some","much","a"],a:2},
+  {q:"There are _____ pictures on the wall.",o:["much","a","some","any"],a:2},
+  {q:"I saw _____ old man near the station.",o:["a","an","some","many"],a:1},
+  {q:"My sister bought _____ new shoes.",o:["some","much","a","any"],a:0},
+  {q:"We don't need _____ chairs.",o:["much","any","some","a"],a:1},
+  {q:"How _____ petrol is left in the car?",o:["many","a","much","some"],a:2},
+  {q:"There are _____ mistakes in your exercise.",o:["some","much","a","any"],a:0},
+  {q:"He wants to eat _____ sandwich.",o:["some","a","much","many"],a:1},
+  {q:"Do you have _____ money with you?",o:["some","many","any","a"],a:[0,2]},
+  {q:"There isn't _____ food on the table.",o:["many","much","some","a"],a:1},
+  {q:"How _____ cars are in the parking lot?",o:["many","much","any","a"],a:0},
+  {q:"My teacher gave us _____ useful advice.",o:["a","many","some","any"],a:2},
+  {q:"She is wearing _____ orange hat.",o:["a","an","some","much"],a:1},
+  {q:"Can you buy _____ apples for me?",o:["some","much","a","an"],a:0},
+  {q:"There aren't _____ buses after midnight.",o:["much","some","any","a"],a:2},
+  {q:"How _____ homework do you have?",o:["much","many","any","some"],a:0},
+  {q:"We invited _____ friends to dinner.",o:["much","some","a","any"],a:1},
+  {q:"He bought _____ camera yesterday.",o:["a","some","much","many"],a:0},
+  {q:"Is there _____ soup in the pot?",o:["many","any","a","some"],a:[1,3]},
+  {q:"I don't know _____ people in this city.",o:["much","any","a","some"],a:1},
+  {q:"How _____ tea is in the cup?",o:["many","much","any","a"],a:1},
+  {q:"There are _____ fish in the pond.",o:["some","much","a","any"],a:0},
+  {q:"We need _____ hour to finish the work.",o:["a","an","some","much"],a:1},
+  {q:"Would you like _____ more rice?",o:["many","some","a","any"],a:1},
+  {q:"There isn't _____ noise outside tonight.",o:["many","much","some","a"],a:1},
+  {q:"Are there _____ messages for me?",o:["some","much","any","a"],a:[0,2]},
+  {q:"How _____ bottles of water do you need?",o:["much","many","some","a"],a:1},
+  {q:"She has _____ beautiful garden.",o:["a","an","some","many"],a:0},
+  {q:"My father bought _____ cheese and bread.",o:["some","many","a","any"],a:0},
+  {q:"We don't have _____ clean cups.",o:["much","any","some","a"],a:1},
+  {q:"How _____ traffic is there in the city centre?",o:["many","much","any","a"],a:1},
+  {q:"There are _____ students waiting outside.",o:["some","much","a","any"],a:0},
+  {q:"He ate _____ egg for breakfast.",o:["a","an","some","many"],a:1},
+  {q:"Could I have _____ more coffee, please?",o:["some","any","many","a"],a:0},
+  {q:"There isn't _____ furniture in the room.",o:["many","much","some","a"],a:1},
+  {q:"Did you buy _____ souvenirs on your trip?",o:["some","much","any","a"],a:[0,2]},
+  {q:"How _____ potatoes are in the bag?",o:["much","many","any","some"],a:1},
+  {q:"My uncle has _____ small farm.",o:["an","some","a","much"],a:2},
+  {q:"We need _____ information before making a decision.",o:["some","many","a","any"],a:0},
+  {q:"There aren't _____ clouds in the sky.",o:["much","some","any","a"],a:2},
+  {q:"How _____ oil should I add?",o:["many","much","some","a"],a:1},
+  {q:"I have _____ ideas for the school project.",o:["much","a","some","any"],a:2},
+  {q:"She wants to be _____ engineer.",o:["a","an","some","many"],a:1},
+  {q:"Would you like _____ fruit after dinner?",o:["any","many","some","a"],a:2},
+  {q:"There isn't _____ coffee left in the pot.",o:["much","many","some","a"],a:0}
+];
+
+const $ = (id) => document.getElementById(id);
+const letters = ['A','B','C','D'];
+const praise = ['Tuyệt vời, phi hành gia! 🚀','Chuẩn xác! Bay tiếp nào! ⭐','Quá đỉnh! Một cú chọn hoàn hảo! 🔥','Chính xác! Không gì cản nổi bạn! 💥','Siêu lắm! Tiếp tục chinh phục nhé! 🏆'];
+let index = 0, score = 0, wrongCount = 0, attempts = 0, firstTryCorrect = 0, streak = 0, wrongCountOnThisQuestion = 0;
+let sessionStart = 0, questionStart = 0, timerId = null, advanceTimer = null;
+let soundOn = true, audioCtx = null, musicTimer = null, musicStep = 0, hasAnswered = false;
+let player = 'Space Ranger';
+
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); $(id).classList.add('active'); }
+function getAudio(){
+  if(!audioCtx){ const AC = window.AudioContext || window.webkitAudioContext; if(AC) audioCtx = new AC(); }
+  if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq, duration=.12, type='sine', volume=.045, delay=0){
+  if(!soundOn) return; const ctx=getAudio(); if(!ctx) return;
+  const osc=ctx.createOscillator(), gain=ctx.createGain();
+  osc.type=type; osc.frequency.setValueAtTime(freq,ctx.currentTime+delay);
+  gain.gain.setValueAtTime(.0001,ctx.currentTime+delay);
+  gain.gain.exponentialRampToValueAtTime(volume,ctx.currentTime+delay+.012);
+  gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+delay+duration);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start(ctx.currentTime+delay);osc.stop(ctx.currentTime+delay+duration+.02);
+}
+function clickSound(){ tone(520,.055,'triangle',.025); }
+function wrongSound(){ tone(220,.16,'sawtooth',.035);tone(165,.2,'triangle',.03,.12); }
+function correctSound(){ [523,659,784,1047].forEach((n,i)=>tone(n,.23,'triangle',.05,i*.075)); }
+function startMusic(){
+  stopMusic(); if(!soundOn) return;
+  const melody=[392,523,659,523,440,587,698,587,392,523,784,659,440,587,784,659];
+  musicTimer=setInterval(()=>{ if(!soundOn || !audioCtx) return; tone(melody[musicStep%melody.length],.19,'sine',.009); if(musicStep%4===0) tone(130,.22,'triangle',.008); musicStep++; },260);
+}
+function stopMusic(){ if(musicTimer){clearInterval(musicTimer);musicTimer=null;} }
+function setSound(on){ soundOn=on; $('soundBtn').textContent=on?'🔊 Sound ON':'🔇 Sound OFF'; $('soundBtn').setAttribute('aria-label',on?'Turn sound off':'Turn sound on'); if(on){getAudio();if($('gameScreen').classList.contains('active'))startMusic();}else stopMusic(); }
+function fmtTime(ms){ const s=Math.floor(ms/1000),m=Math.floor(s/60),r=s%60;return String(m).padStart(2,'0')+':'+String(r).padStart(2,'0'); }
+function updateClock(){ $('timeValue').textContent=fmtTime(Date.now()-sessionStart); }
+function startGame(){
+  getAudio(); player=($('playerName').value||'').trim()||'Space Ranger';
+  index=0;score=0;wrongCount=0;attempts=0;firstTryCorrect=0;streak=0;wrongCountOnThisQuestion=0;sessionStart=Date.now();
+  if(timerId)clearInterval(timerId);timerId=setInterval(updateClock,250);
+  $('scoreValue').textContent='0';$('playerGreeting').textContent='Ready, '+player+'?';
+  showScreen('gameScreen');startMusic();renderQuestion();
+}
+function renderQuestion(){
+  hasAnswered=false; if(advanceTimer){clearTimeout(advanceTimer);advanceTimer=null;}
+  const item=questions[index];
+  $('questionNumber').textContent=String(index+1).padStart(2,'0');
+  $('progressText').textContent=(index+1)+' / '+questions.length;
+  $('progressFill').style.width=(index/questions.length*100)+'%';
+  $('questionText').textContent=item.q;
+  $('feedback').className='feedback';$('feedback').innerHTML='<span class="face">🧠</span><span>Chọn đáp án chính xác để tiếp tục nhiệm vụ!</span>';
+  const grid=$('answerGrid');grid.innerHTML='';
+  item.o.forEach((choice,i)=>{
+    const btn=document.createElement('button');btn.type='button';btn.className='answer';
+    const letter=document.createElement('span');letter.className='letter';letter.textContent=letters[i]+'.';
+    const label=document.createElement('span');label.textContent=choice;
+    btn.append(letter,label);btn.addEventListener('click',()=>chooseAnswer(i,btn));grid.append(btn);
+  });
+  questionStart=Date.now();$('gamePanel').classList.remove('shake-panel');
+}
+function chooseAnswer(selected,button){
+  if(hasAnswered) return;
+  attempts++;clickSound();
+  const item=questions[index];
+  const isCorrect = Array.isArray(item.a) ? item.a.includes(selected) : selected===item.a;
+  if(!isCorrect){
+    wrongCount++;wrongCountOnThisQuestion++;streak=0;button.classList.add('wrong');button.disabled=true;
+    wrongSound();$('gamePanel').classList.remove('shake-panel');void $('gamePanel').offsetWidth;$('gamePanel').classList.add('shake-panel');
+    $('feedback').className='feedback bad';
+    $('feedback').innerHTML='<span class="face">🛰️</span><span>Oops! Chưa chính xác đâu. Hãy thử lại nhé! Gợi ý: Xác định danh từ đếm được hay không đếm được, rồi để ý dạng câu.</span>';
+    // Keep the question active. A wrong choice is disabled, but the remaining choices stay available.
+    return;
+  }
+  hasAnswered=true;button.classList.add('correct');
+  const elapsed=(Date.now()-questionStart)/1000;
+  const speedBonus=Math.max(0,Math.round(50*Math.max(0,20-elapsed)/20));
+  const cleanBonus=(wrongCountOnThisQuestion===0)?50:0;
+  streak++;
+  const streakBonus=Math.min(30,streak*5);
+  const earned=100+speedBonus+cleanBonus+streakBonus;
+  score+=earned;
+  // Count first-try accuracy using a per-question attempt counter.
+  if(wrongCountOnThisQuestion===0)firstTryCorrect++;
+  $('scoreValue').textContent=score.toLocaleString('en-US');
+  $('feedback').className='feedback good';
+  $('feedback').innerHTML='<span class="face">🏆</span><span>'+praise[Math.floor(Math.random()*praise.length)]+' <b>+'+earned+' điểm</b> (tốc độ +'+speedBonus+', lần đầu +'+cleanBonus+').</span>';
+  correctSound();launchConfetti();
+  document.querySelectorAll('.answer').forEach(b=>b.disabled=true);
+  $('progressFill').style.width=((index+1)/questions.length*100)+'%';
+  advanceTimer=setTimeout(()=>{
+    index++;
+    if(index>=questions.length) finishGame(); else {wrongCountOnThisQuestion=0;renderQuestion();}
+  },1150);
+}
+function launchConfetti(){
+  const layer=$('confettiLayer');const colors=['#ffd34d','#42d6ed','#ff6377','#25c58a','#8b72f0','#ff884d'];
+  for(let i=0;i<32;i++){
+    const p=document.createElement('i');p.className='confetti';p.style.left=(Math.random()*100)+'%';p.style.background=colors[i%colors.length];p.style.setProperty('--drift',(Math.random()*180-90)+'px');p.style.animationDelay=(Math.random()*.22)+'s';layer.append(p);setTimeout(()=>p.remove(),1700);
+  }
+  for(let i=0;i<7;i++){
+    const s=document.createElement('span');s.className='sparkle';s.textContent=['⭐','✨','💫'][i%3];s.style.left=(30+Math.random()*40)+'%';s.style.top=(25+Math.random()*30)+'%';s.style.setProperty('--x',(Math.random()*180-90)+'px');s.style.setProperty('--y',(Math.random()*-130-20)+'px');layer.append(s);setTimeout(()=>s.remove(),900);
+  }
+}
+function finishGame(){
+  if(timerId){clearInterval(timerId);timerId=null;}
+  stopMusic();const totalMs=Date.now()-sessionStart;const accuracy=attempts?Math.round(questions.length/attempts*100):100;
+  $('progressFill').style.width='100%';$('finalScore').textContent=score.toLocaleString('en-US');
+  $('finalTime').textContent=fmtTime(totalMs);$('finalWrong').textContent=wrongCount;
+  $('finalAccuracy').textContent=accuracy+'%';$('finalFirstTry').textContent=firstTryCorrect+' / '+questions.length;
+  let rank,emoji,title,comment;
+  if(accuracy>=95&&firstTryCorrect>=85){rank='🏅 HUYỀN THOẠI NGÂN HÀ';emoji='🦸‍♂️';title='GALAXY LEGEND!';comment='Không thể tin nổi! Bạn đã chinh phục nhiệm vụ như một huyền thoại thực thụ. Tốc độ, sự tập trung và kiến thức đều cực đỉnh. Vũ trụ ngữ pháp đã nằm trong tay bạn!';}
+  else if(accuracy>=85){rank='🚀 ĐẠI ÚY VŨ TRỤ';emoji='🧑‍🚀';title='SUPER RANGER!';comment='Quá xuất sắc, chiến binh! Bạn đã vượt qua hàng loạt thử thách và chứng minh mình rất bản lĩnh. Cứ giữ phong độ này, nhiệm vụ khó hơn cũng không làm khó được bạn!';}
+  else if(accuracy>=70){rank='⭐ ĐỘI TRƯỞNG PHI HÀNH ĐOÀN';emoji='🛸';title='MISSION ACCOMPLISHED!';comment='Một hành trình đáng tự hào! Bạn đã kiên trì thử lại và hoàn thành đủ 93 câu. Mỗi lần thử là một bước tiến — sẵn sàng cho chuyến phiêu lưu tiếp theo!';}
+  else{rank='🌟 NHÀ THÁM HIỂM TẬP SỰ';emoji='🚀';title='YOU DID IT!';comment='Bạn đã không bỏ cuộc và hoàn thành toàn bộ nhiệm vụ — đó mới là tinh thần của một nhà thám hiểm! Luyện tập thêm một lượt nữa, bạn sẽ còn tiến bộ mạnh mẽ hơn!';}
+  $('reviewEmoji').textContent=emoji;$('reviewTitle').textContent=title;$('rankLabel').textContent=rank;$('reviewComment').textContent=comment;
+  $('reviewSubtitle').textContent='Phi công '+player+' đã vượt qua tất cả '+questions.length+' câu hỏi!';
+  showScreen('reviewScreen');correctSound();launchConfetti();
+}
+function goHome(){if(timerId)clearInterval(timerId);if(advanceTimer)clearTimeout(advanceTimer);stopMusic();showScreen('startScreen');}
+$('startBtn').addEventListener('click',startGame);
+$('playerName').addEventListener('keydown',e=>{if(e.key==='Enter')startGame();});
+$('soundBtn').addEventListener('click',()=>setSound(!soundOn));
+$('playAgainBtn').addEventListener('click',startGame);
+$('homeBtn').addEventListener('click',goHome);
+
+// Audio is created after the player's first click, so browser autoplay rules are respected.
+</script>
+</body>
+</html>
